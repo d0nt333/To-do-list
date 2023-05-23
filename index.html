@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+    <head>
+        <title>To-Do-List</title>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="To Do List, Do zrobienia, Lista, Projekt, JavaScript">
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        input{
+            border-radius: 10px;
+            padding: 10px;
+            width: 50%;
+        }
+        p{
+            padding: 30px;
+            background-color: #CFC9C8;
+            border-radius: 15px;
+            font-family: Snell Roundhand, cursive;
+            margin: 2%;
+            width: 96%;
+            box-sizing: border-box;
+            
+        }
+        button{
+            background-color:#1a1a24;
+            border-radius: 8px;
+            padding: 10px;
+            color: white;
+        }
+        p button{
+            float: right;
+            padding-bottom: 5px;
+            padding-top: 5px;
+        }
+        h1, form{
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
+    </head>
+    <body>
+        <form id="listaForm">
+            <h1>To-Do-List</h1>
+            <input id="lista" type="text" placeholder="Wpisz czynność do zrobienia">
+            <button type="submit">Dopisz</button><br>
+        </form>
+        <div id="wyswietlanielisty">
+        </div>
+        <script>
+
+            //Nasłuchiwanie, czy ktoś nie uzupełnił formularza
+            document.querySelector("#listaForm").addEventListener("submit", event=>{
+                event.preventDefault()
+                //Dokładanie kolejnego elementu listy
+                let wartosc=document.querySelector("#lista").value
+                if(wartosc){
+                    //--> <div><p></p></div>
+                    let paragraf=document.createElement("p")
+                    paragraf.innerHTML=wartosc
+
+                    //--> <p>{Element Listy}   <button>{Przycisk Usuwający}<button></p>
+                    let przycisk=document.createElement("button")
+                    przycisk.onclick=()=>{
+                        paragraf.remove()
+                    }
+                    przycisk.innerHTML="Usuń"
+                    paragraf.appendChild(przycisk)
+                    document.querySelector("#wyswietlanielisty").appendChild(paragraf)
+                    //Usuwamy wartość z ramki
+                    document.querySelector("#lista").value=""
+                }
+            })
+        </script>
+    </body>
+</html>
